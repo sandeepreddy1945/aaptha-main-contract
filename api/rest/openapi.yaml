@@ -1,0 +1,242 @@
+openapi: 3.0.3
+info:
+  title: Aaptha Care Works - OpenAPI 3.0
+  description: |-
+    This is Aaptha Care Contract to mainly define the Operations required for the 
+    Aaptha Elder Care Operations.
+    
+    Some useful links:
+    - [Aaptha Care Main Contract](https://github.com/Aaptha-Dev-Works/aaptha-main-contract)
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: b.sandeepreddy209@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://github.com/Aaptha-Dev-Works/aaptha-main-contract
+tags:
+  - name: user
+    description: Operations about user
+
+paths:
+  /v1/user:
+    get:
+      tags:
+        - user
+      summary: Get User by the provided user Id.
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: query
+          description: The Unique Id Assigned to the User
+          required: true
+          explode: true
+          allowEmptyValue: false
+          example: 1
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetailResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UserDetailResponse'
+        '400':
+          description: Invalid status value
+    post:
+      tags:
+        - user
+      summary: Add Used by the provided details
+      operationId: addUser
+      requestBody:
+        description: User Request Body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDetailRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UserDetailRequest'
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetailResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UserDetailResponse'
+        '400':
+          description: Invalid status value
+    put:
+      tags:
+        - user
+      summary: Add Used by the provided details
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: query
+          description: The Unique Id Assigned to the User
+          required: true
+          explode: true
+          allowEmptyValue: false
+          example: 1
+          schema:
+            type: integer
+      requestBody:
+        description: User Request Body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDetailRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UserDetailRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetailResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UserDetailResponse'
+        '400':
+          description: Invalid status value
+    delete:
+      tags:
+        - user
+      summary: Get User by the provided user Id.
+      operationId: deleteUserById
+      parameters:
+        - name: id
+          in: query
+          description: The Unique Id Assigned to the User
+          required: true
+          explode: true
+          allowEmptyValue: false
+          example: 1
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid status value
+
+components:
+  schemas:
+    UserDetailRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: sandeep
+          description: First Name of the user
+        lastName:
+          type: string
+          example: reddy
+          description: Last Name of the user
+        userTypeId:
+          type: integer
+          example: 1
+          description: Type Id associated with the user. 1 - Care Taker, 2 - Client, 3 - Admin etc.
+        userRoleIds:
+          type: string
+          example: 1
+          description: Role Id's associated with the user (, seperated values)
+        aadharNumber:
+          type: string
+          example: 1234 589 0123
+          description: The Aadhar detais associated with the user
+        dob:
+          type: string
+          format: date
+          example: 1993-01-01
+          description: The date of birth of the user
+        gender:
+          type: string
+          example: Male
+          enum:
+            - Male
+            - Female
+            - Others
+          description: Gender of the user
+        qualification:
+          type: string
+          example: 10th Pass
+          description: Qualification of the User
+        verified:
+          type: boolean
+          example: true
+          description: Flag To Indicate if the user is verified
+    UserDetailResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Unqiue Key assigned to the user
+        firstName:
+          type: string
+          example: sandeep
+          description: First Name of the user
+        lastName:
+          type: string
+          example: reddy
+          description: Last Name of the user
+        userTypeId:
+          type: integer
+          example: 1
+          description: Type Id associated with the user. 1 - Care Taker, 2 - Client, 3 - Admin etc.
+        userRoleIds:
+          type: string
+          example: 1
+          description: Role Id's associated with the user (, seperated values)
+        aadharNumber:
+          type: string
+          example: 1234 589 0123
+          description: The Aadhar detais associated with the user
+        dob:
+          type: string
+          format: date
+          example: 1993-01-01
+          description: The date of birth of the user
+        gender:
+          type: string
+          example: Male
+          enum:
+            - Male
+            - Female
+            - Others
+          description: Gender of the user
+        qualification:
+          type: string
+          example: 10th Pass
+          description: Qualification of the User
+        verified:
+          type: boolean
+          example: true
+          description: Flag To Indicate if the user is verified
+        createdDate:
+          type: string
+          format: date-time
+          description: Created Date
+        createdUser:
+          type: string
+          description: user name of the sytem or user that created the user.
+          example: sandeep
+
