@@ -54,7 +54,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/Aaptha-Dev-Works/aaptha-main-contract</url>
+            <url>https://maven.pkg.github.com/sandeepreddy1945/aaptha-main-contract</url>
             <layout>default</layout>
             <uniqueVersion>true</uniqueVersion>
         </repository>
